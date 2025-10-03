@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    Is it supported? <span id="result"></span>
+    <script type="text/javascript">
+      async function getIsSupported () {
+        try {
+          const isSupported = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()
+
+          return isSupported
+        } catch (_) {
+          return false
+        }
+      }
+
+      ;(async () => {
+        const isSupported = await getIsSupported()
+
+        document.getElementById('result').innerHTML = (isSupported ? 'YES' : 'NO')
+      })()
+    </script>
+  </body>
+</html>

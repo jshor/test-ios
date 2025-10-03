@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Does it work?</title>
+    <style>
+      body {
+        font-family: 'Courier New', Courier, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>Select allow values:</strong>
+    </p>
+    <div>
+      <input type="checkbox" id="publickeyCredentialsGet" value="publickey-credentials-get *" />
+      <label for="publickeyCredentialsGet">publickey-credentials-get</label>
+    </div>
+    <div>
+      <input type="checkbox" id="publickeyCredentialsCreate" value="publickey-credentials-create *" />
+      <label for="publickeyCredentialsCreate">publickey-credentials-create</label>
+    </div>
+    
+    <p>
+      <strong>Allow values:</strong>
+      <span id="allow"></span>
+    </p>
+
+    <div id="iframeContainer">
+      <iframe id="iframe" src="./support.html" allow=""></iframe>
+    </div>
+    <script>
+      const allowList = new Set()
+
+      function launch () {
+        const container = document.getElementById('iframeContainer')
+        const iframe = document.createElement('iframe')
+
+        iframe.src = './support.html'
+        iframe.allow = Array.from(allowList).join(' ')
+
+        document.getElementById('allow').innerHTML = iframe.allow
+
+        container.getElementsByTagName('iframe')[0]?.remove()
+        container.appendChild(iframe)
+      }
+
+      function onChange (e) {
+        if (e.srcElement.checked) {
+          allowList.add(e.srcElement.value)
+        } else {
+          allowList.delete(e.srcElement.value)
+        }
+        
+        launch()
+      }
+
+      function addEvent (id) {
+        document
+          .getElementById(id)
+          .addEventListener('change', onChange)
+      }
+
+      launch()
+
+      addEvent('publickeyCredentialsGet')
+      addEvent('publickeyCredentialsCreate')
+    </script>
+  </body>
+</html>
