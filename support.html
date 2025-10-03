@@ -2,6 +2,7 @@
 <html>
   <body>
     Is it supported? <span id="result"></span>
+    <button id="checkBtn">CHECK NOW</button>
     <script type="text/javascript">
       async function getIsSupported () {
         try {
@@ -13,11 +14,13 @@
         }
       }
 
-      ;(async () => {
-        const isSupported = await getIsSupported()
+      document
+        .getElementById('checkBtn')
+        .addEventListener('click', async () => {
+          const isSupported = await getIsSupported()
 
-        document.getElementById('result').innerHTML = (isSupported ? 'YES' : 'NO')
-      })()
+          document.getElementById('result').innerHTML = (isSupported ? 'YES' : 'NO')
+        })
     </script>
   </body>
 </html>
