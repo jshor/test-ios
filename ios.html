@@ -45,8 +45,8 @@
       async function getDeviceSupport() {
         const userAgentData = await navigator.userAgentData?.getHighEntropyValues(['platformVersion'])
 
-        document.getElementById('platformName').innerHTML = (platformData?.platform?.trim() && { platformName: platformData.platform })
-        document.getElementById('platformVersion').innerHTML = (platformData?.platformVersion?.trim() && { platformVersion: platformData.platformVersion })
+        document.getElementById('platformName').innerHTML = userAgentData?.platform?.trim()
+        document.getElementById('platformVersion').innerHTML = userAgentData?.platformVersion?.trim()
       }
 
       document.getElementById('printResult').addEventListener('click', printResult)
