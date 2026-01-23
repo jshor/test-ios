@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Does it work?</title>
+    <style>
+      body {
+        font-family: 'Courier New', Courier, monospace;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1><pre>PublicKeyCredential.getClientCapabilities()</pre> check</h1>
+
+    Does it? <span id="doesIt">?</span>
+    <button id="printResult">Check now</button>
+    <br />
+    <br />
+    <br />
+    Platform name: <span id="platformName">?</span><br />
+    Platform version: <span id="platformVersion">?</span><br />
+    
+    <script>
+      function checkResult() {
+        try {
+          if (window.PublicKeyCredential &&
+              PublicKeyCredential.getClientCapabilities) {
+            const capabilities = await PublicKeyCredential.getClientCapabilities();
+            if (capabilities.conditionalGet === true &&
+                capabilities.passkeyPlatformAuthenticator === true) {
+              // The browser supports passkeys and conditional mediation.
+              return true
+            }
+          }
+        } catch (error) {
+        }
+
+        return false
+      }
+
+      function printResult() {
+        document.getElementById('doesIt').innerHTML = checkResult() ? 'Yes' : 'No'
+      }
+
+      document.getElementById('printResult').addEventListener('click', printResult)
+      document.getElementById('platformName').innerHTML = (platformData?.platform?.trim() && { platformName: platformData.platform })
+      document.getElementById('platformVersion').innerHTML = (platformData?.platformVersion?.trim() && { platformVersion: platformData.platformVersion })
+    </script>
+  </body>
+</html>
