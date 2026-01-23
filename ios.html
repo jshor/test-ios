@@ -21,7 +21,7 @@
     Platform version: <span id="platformVersion">?</span><br />
     
     <script>
-      function checkResult() {
+      async function checkResult() {
         try {
           if (window.PublicKeyCredential &&
               PublicKeyCredential.getClientCapabilities) {
@@ -38,8 +38,8 @@
         return false
       }
 
-      function printResult() {
-        document.getElementById('doesIt').innerHTML = checkResult() ? 'Yes' : 'No'
+      async function printResult() {
+        document.getElementById('doesIt').innerHTML = await checkResult() ? 'Yes' : 'No'
       }
 
       document.getElementById('printResult').addEventListener('click', printResult)
