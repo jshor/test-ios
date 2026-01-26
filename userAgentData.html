@@ -12,7 +12,7 @@
       (async () => {
         const userAgentData = await navigator.userAgentData?.getHighEntropyValues(['platformVersion'])
 
-        document.getElementById('userAgentData').innerHTML = JSON.stringify(userAgentData)
+        document.getElementById('userAgentData').innerHTML = JSON.stringify(userAgentData, null, 2)
       })()
     </script>
   </body>
