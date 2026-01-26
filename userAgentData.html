@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Agent Data</title>
+  </head>
+  <body>
+    <h1>
+      <pre>navigator.userAgentData.getHighEntropyValues()</pre>
+    </h1>
+    <pre id="userAgentData"></pre>
+    <script>
+      (async () => {
+        const userAgentData = await navigator.userAgentData?.getHighEntropyValues(['platformVersion'])
+
+        document.getElementById('userAgentData').innerHTML = JSON.stringify(userAgentData)
+      })()
+    </script>
+  </body>
+</html>
