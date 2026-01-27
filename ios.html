@@ -10,7 +10,7 @@
   </head>
   <body>
 
-    <h1><pre>PublicKeyCredential.getClientCapabilities()</pre> check</h1>
+    <h1><pre>PublicKeyCredential.getClientCapabilities()</pre> check 1</h1>
 
     Does it? <span id="doesIt">?</span>
     <button id="printResult">Check now</button>
@@ -27,7 +27,6 @@
               PublicKeyCredential.getClientCapabilities) {
             const capabilities = await PublicKeyCredential.getClientCapabilities();
             if (capabilities.conditionalGet === true &&
-                capabilities.passkeyPlatformAuthenticator === true &&
                 capabilities.userVerifyingPlatformAuthenticator === true) {
               // The browser supports passkeys and conditional mediation.
               return true
