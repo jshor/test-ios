@@ -27,7 +27,8 @@
               PublicKeyCredential.getClientCapabilities) {
             const capabilities = await PublicKeyCredential.getClientCapabilities();
             if (capabilities.conditionalGet === true &&
-                capabilities.passkeyPlatformAuthenticator === true) {
+                capabilities.passkeyPlatformAuthenticator === true &&
+                capabilities.userVerifyingPlatformAuthenticator === true) {
               // The browser supports passkeys and conditional mediation.
               return true
             }
