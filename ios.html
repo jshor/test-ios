@@ -32,6 +32,11 @@
               return true
             }
           }
+
+          if (window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable &&
+              await window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()) {
+            return true
+          }
         } catch (error) {
         }
 
