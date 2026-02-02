@@ -7,18 +7,63 @@
 
     <h1>WebAuthn Popup Launcher</h1>
 
-    <button id="btn">Launch Popup</button>
+    Error message? <span id="result">(TBD)</span>
+    <br />
+    <br />
+    <button id="btnPopup">Launch Popup</button>
+    <br />
+    <br />
+    <button id="btnWebAuthn">Launch WebAuthn</button>
     
     <script>
     document
-        .getElementById('btn')
+        .getElementById('btnPopup')
         .addEventListener('click', () => {
             window.open(
-            'popup.html',
+            'webauthn.html',
             'webauthnPopup',
             'width=400,height=600'
             )
         })
+
+    document
+        .getElementById('btnWebAuthn')
+        .addEventListener('click', async () => {
+            document.getElementById('result').textContent = await createCredential()
+        })
+
+      async function createCredential() {
+        try {
+          const publicKeyCredentialCreationOptions = {
+            challenge: Uint8Array.from(
+                'UZSL85T9AFCUZSL85T9AFC', c => c.charCodeAt(0)),
+            rp: {
+                name: "Test",
+                id: "josh.so",
+            },
+            user: {
+                id: Uint8Array.from(
+                    "UZSL85T9AFC", c => c.charCodeAt(0)),
+                name: "lee@webauthn.guide",
+                displayName: "Lee",
+            },
+            pubKeyCredParams: [{alg: -7, type: "public-key"}],
+            authenticatorSelection: {
+                authenticatorAttachment: "cross-platform",
+            },
+            timeout: 60000,
+            attestation: "direct"
+        };
+        
+        const credential = await navigator.credentials.create({
+            publicKey: publicKeyCredentialCreationOptions
+        })
+
+        return '(operation was successful)'
+      } catch (error) {
+          return error.toString()
+      }
+    }
     </script>
   </body>
 </html>
