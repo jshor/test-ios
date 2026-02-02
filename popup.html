@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebAuthn Test</title>
+  </head>
+  <body>
+
+    <h1>WebAuthn Focus Error Test</h1>
+
+    Error message? <span id="result"></span>
+    
+    <script>
+      async function createCredential() {
+        try {
+          const publicKeyCredentialCreationOptions = {
+            challenge: Uint8Array.from(
+                'UZSL85T9AFCUZSL85T9AFC', c => c.charCodeAt(0)),
+            rp: {
+                name: "Test",
+                id: "localhost",
+            },
+            user: {
+                id: Uint8Array.from(
+                    "UZSL85T9AFC", c => c.charCodeAt(0)),
+                name: "lee@webauthn.guide",
+                displayName: "Lee",
+            },
+            pubKeyCredParams: [{alg: -7, type: "public-key"}],
+            authenticatorSelection: {
+                authenticatorAttachment: "cross-platform",
+            },
+            timeout: 60000,
+            attestation: "direct"
+        };
+        
+        const credential = await navigator.credentials.create({
+            publicKey: publicKeyCredentialCreationOptions
+        })
+
+        return '(operation was successful)'
+      } catch (error) {
+          return error.toString()
+      }
+    }
+
+    (async () => {
+        document.getElementById('result').textContent = await createCredential()
+    })()
+    </script>
+  </body>
+</html>
