@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebAuthn Test</title>
+  </head>
+  <body>
+
+    <h1>WebAuthn Popup Launcher</h1>
+
+    <button id="btn">Launch Popup</button>
+    
+    <script>
+    document
+        .getElementById('btn')
+        .addEventListener('click', () => {
+            window.open(
+            'popup.html',
+            'webauthnPopup',
+            'width=400,height=600'
+            )
+        })
+    </script>
+  </body>
+</html>
